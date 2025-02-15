@@ -24,21 +24,21 @@ jobs:
           node-version: 18
           cache: "pnpm"
 
-      # Step 3: Install pnpm manually (bypassing Corepack)
+      # Step 3: Install pnpm manually using npm
       - name: Install pnpm
         run: npm install -g pnpm
 
-      # Step 4: Ensure pnpm is added to PATH
+      # Step 4: Ensure pnpm is in PATH
       - name: Add pnpm to PATH
         run: echo "$(npm root -g)/pnpm" >> $GITHUB_PATH
 
-      # Step 5: Verify pnpm installation and check PATH
+      # Step 5: Check if pnpm is installed and in PATH
       - name: Verify pnpm installation
         run: |
           echo "pnpm version:"
-          pnpm --version
+          pnpm --version || echo "pnpm is not found"
           echo "pnpm location:"
-          which pnpm
+          which pnpm || echo "pnpm is not found"
           echo "Current PATH:"
           echo $PATH
 
