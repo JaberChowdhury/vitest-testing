@@ -24,28 +24,24 @@ jobs:
           node-version: 18
           cache: "pnpm"
 
-      # Step 3: Ensure Corepack is enabled
-      - name: Enable Corepack
-        run: corepack enable
-
-      # Step 4: Manually install pnpm in case it's missing
+      # Step 3: Install pnpm globally using npm (bypassing corepack)
       - name: Install pnpm
         run: npm install -g pnpm
 
-      # Step 5: Verify pnpm installation
+      # Step 4: Verify pnpm installation and check PATH
       - name: Verify pnpm installation
         run: |
-          echo "Checking pnpm version..."
+          echo "pnpm version:"
           pnpm --version
-          echo "Checking pnpm location..."
+          echo "pnpm location:"
           which pnpm
-          echo "Checking PATH..."
+          echo "Current PATH:"
           echo $PATH
 
-      # Step 6: Install dependencies
+      # Step 5: Install dependencies
       - name: Install dependencies
         run: pnpm install
 
-      # Step 7: Run Vitest tests
+      # Step 6: Run Vitest tests
       - name: Run tests
         run: pnpm test
