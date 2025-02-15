@@ -3,14 +3,14 @@ name: Run Vitest
 on:
   push:
     branches:
-      - main  # Run on pushes to the main branch
+      - main # Run on pushes to the main branch
   pull_request:
     branches:
-      - main  # Run on pull requests targeting the main branch
+      - main # Run on pull requests targeting the main branch
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
 
     steps:
       # Check out the repository
@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'pnpm'  # Cache pnpm dependencies
+          cache: "pnpm" # Cache pnpm dependencies
 
       # Install pnpm
       - name: Install pnpm
@@ -34,4 +34,4 @@ jobs:
 
       # Run Vitest tests
       - name: Run tests
-        run: pnpm test  # Assumes your test script is defined as "test" in package.json
+        run: pnpm test # Assumes your test script is defined as "test" in package.json
