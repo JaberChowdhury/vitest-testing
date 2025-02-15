@@ -1,41 +1,43 @@
-name: Run Vitest
+name: Run Vitest Tests
 
 on:
   push:
     branches:
-      - main
+      - main # Run on pushes to the main branch
   pull_request:
     branches:
-      - main
+      - main # Run on pull requests targeting the main branch
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
 
     steps:
-      # Check out the repository
+      # Step 1: Check out the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Node.js
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
-          cache: "pnpm" # Cache pnpm dependencies
+          node-version: 18 # Use Node.js 18 (or any version you prefer)
+          cache: "pnpm" # Cache pnpm dependencies for faster builds
 
-      # Install pnpm globally using npm
+      # Step 3: Install pnpm using corepack (included with Node.js)
       - name: Install pnpm
-        run: npm install -g pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
 
-      # Verify pnpm installation
+      # Step 4: Verify pnpm installation
       - name: Verify pnpm installation
         run: pnpm --version
 
-      # Install dependencies using pnpm
+      # Step 5: Install dependencies
       - name: Install dependencies
         run: pnpm install
 
-      # Run Vitest tests
+      # Step 6: Run Vitest tests
       - name: Run tests
         run: pnpm test
