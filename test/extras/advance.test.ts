@@ -78,5 +78,32 @@ describe("Advance testing", () => {
     expect(date).toBe("2023-10-01");
   });
 });
-// describe("Advance testing", () => {});
+
+describe("Advance testing with generated case", () => {
+  // Function to check if a number is even
+  function isEven(num: number): boolean | undefined {
+    if (Number.isNaN(num)) {
+      return undefined; // Return undefined for NaN
+    }
+    return num % 2 === 0;
+  }
+
+  // Generate an array of test data (numbers from 1 to 30) and their expected results
+  const testData: [number, boolean | undefined][] = Array.from(
+    { length: 300 },
+    (_, index) => index + 1
+  ).map((d: number) => {
+    return [d, isEven(d)];
+    // return [d, true];
+  });
+
+  // Run the parameterized tests
+  test.each(testData)(
+    "isEven(%i) should return %s",
+    (input: number, expected: boolean | undefined) => {
+      expect(isEven(input)).toBe(expected); // Assert the function output
+    }
+  );
+});
+
 // describe("Advance testing", () => {});
