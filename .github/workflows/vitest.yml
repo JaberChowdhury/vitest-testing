@@ -24,11 +24,13 @@ jobs:
           node-version: 18
           cache: "pnpm" # Cache pnpm dependencies
 
-      # Install pnpm using pnpm/action-setup
+      # Install pnpm globally using npm
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest # You can specify a specific version if needed
+        run: npm install -g pnpm
+
+      # Verify pnpm installation
+      - name: Verify pnpm installation
+        run: pnpm --version
 
       # Install dependencies using pnpm
       - name: Install dependencies
