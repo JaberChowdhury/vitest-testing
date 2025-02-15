@@ -17,27 +17,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
+      # Step 2: Set up Node.js with pnpm caching
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18 # Use Node.js 18 (or any version you prefer)
           cache: "pnpm" # Cache pnpm dependencies for faster builds
 
-      # Step 3: Install pnpm using corepack (included with Node.js)
-      - name: Install pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
+      # Step 3: Enable Corepack (included with Node.js)
+      - name: Enable Corepack
+        run: corepack enable
 
-      # Step 4: Verify pnpm installation
+      # Step 4: Install and activate pnpm
+      - name: Install pnpm
+        run: corepack prepare pnpm@latest --activate
+
+      # Step 5: Verify pnpm installation
       - name: Verify pnpm installation
         run: pnpm --version
 
-      # Step 5: Install dependencies
+      # Step 6: Install dependencies
       - name: Install dependencies
         run: pnpm install
 
-      # Step 6: Run Vitest tests
+      # Step 7: Run Vitest tests
       - name: Run tests
         run: pnpm test
