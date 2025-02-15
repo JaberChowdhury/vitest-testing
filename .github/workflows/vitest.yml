@@ -24,11 +24,15 @@ jobs:
           node-version: 18
           cache: "pnpm"
 
-      # Step 3: Install pnpm globally using npm (bypassing corepack)
+      # Step 3: Install pnpm manually (bypassing Corepack)
       - name: Install pnpm
         run: npm install -g pnpm
 
-      # Step 4: Verify pnpm installation and check PATH
+      # Step 4: Ensure pnpm is added to PATH
+      - name: Add pnpm to PATH
+        run: echo "$(npm root -g)/pnpm" >> $GITHUB_PATH
+
+      # Step 5: Verify pnpm installation and check PATH
       - name: Verify pnpm installation
         run: |
           echo "pnpm version:"
@@ -38,10 +42,10 @@ jobs:
           echo "Current PATH:"
           echo $PATH
 
-      # Step 5: Install dependencies
+      # Step 6: Install dependencies
       - name: Install dependencies
         run: pnpm install
 
-      # Step 6: Run Vitest tests
+      # Step 7: Run Vitest tests
       - name: Run tests
         run: pnpm test
