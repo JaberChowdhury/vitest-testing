@@ -1,3 +1,5 @@
+![Tests](https://github.com/JaberChowdhury/vitest-testing/actions/workflows/vitest.yml/badge.svg)
+
 **_<h1 style="text-align:center;">String</h1>_**
 
 ### 1. **Exact String Matching**
